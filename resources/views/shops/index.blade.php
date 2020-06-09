@@ -74,24 +74,24 @@
             });
         }
 
-    function paginate(btn) {
-			let page = btn.href.split("?page=")[1];
-			let get = location.href.split('/?')[1];
-            if (get) {
-                $.get(`/paginate/?${get}&page=${page}`).done(function(data){
-                    console.log(data);
-                    $('.pagination').remove();
-                    $('#list-product').append(data);
-                });
-            }
-            else{
-                $.get(`/paginate/?page=${page}`).done(function(data){
-                    console.log(data);
-                    $('.pagination').remove();
-                    $('#list-product').append(data);
-                });
-            }
-        }
+    // function paginate(btn) {
+	// 		let page = btn.href.split("?page=")[1];
+	// 		let get = location.href.split('/?')[1];
+    //         if (get) {
+    //             $.get(`/paginate/?${get}&page=${page}`).done(function(data){
+    //                 console.log(data);
+    //                 $('.pagination').remove();
+    //                 $('#list-product').append(data);
+    //             });
+    //         }
+    //         else{
+    //             $.get(`/paginate/?page=${page}`).done(function(data){
+    //                 console.log(data);
+    //                 $('.pagination').remove();
+    //                 $('#list-product').append(data);
+    //             });
+    //         }
+    //     }
 
 </script>
 @endsection
