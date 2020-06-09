@@ -13,7 +13,7 @@
             e.preventDefault();
             let href = location.origin;
             href += `/paginate/`;
-            href += location.search[1] ? `${location.search[1]}&page=`: `?page=`;
+            href += location.search ? `${location.search}&page=`: `?page=`;
             href +=$(this).data('next');
             console.log(href);
             $.get(`${href}`).done(function(data){
