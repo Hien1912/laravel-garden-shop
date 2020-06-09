@@ -26,7 +26,7 @@
     <header class="container-fluid">
         <nav class="navbar navbar-light navbar-expand-lg container">
             <a class="navbar-brand logo" href="/">
-                <img class="img-logo" src="brand.png" alt="logo">
+                <img class="img-logo" src="./brand.png" alt="logo">
             </a>
             <div class="toast text-success bg-light mx-auto w-auto fixed-top" data-autohide="true" data-delay="2000">
             </div>
