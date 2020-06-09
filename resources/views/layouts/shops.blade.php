@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    <meta name="token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <base href="{{ secure_asset('') }}">
     {{-- <base href="{{ asset('') }}"> --}}
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -136,7 +136,13 @@
     </footer>
 </body>
 <script>
+    
     $(document).ready(function () {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         $('.btn-group, .dropdown-menu').hover(function () {
             let btn = $(this).parent();
             $('.dropdown-menu').removeClass('show');
