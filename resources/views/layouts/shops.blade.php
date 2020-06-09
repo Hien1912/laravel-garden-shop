@@ -12,21 +12,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link rel="stylesheet" href="./shops/assets/css/styles.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="./css/style.css">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script src="shops/assets/js/script.min.js"></script>
+    <script src="./shops/assets/js/script.min.js"></script>
     <title>@yield('title', 'Trang chủ')</title>
 </head>
 <body>
     <header class="container-fluid">
         <nav class="navbar navbar-light navbar-expand-lg container">
             <a class="navbar-brand logo" href="/">
-                <img class="img-logo" src="./brand.png" alt="logo">
+                <img class="img-logo" src="./brand.png" alt="logo" style="">
             </a>
             <div class="toast text-success bg-light mx-auto w-auto fixed-top" data-autohide="true" data-delay="2000">
             </div>
