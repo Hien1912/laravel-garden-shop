@@ -10,6 +10,7 @@
             href += `/paginate/`;
             href += location.search[1] ? `${location.search[1]}&page=`: `?page=`;
             href +=$(this).data('next');
+            console.log(href);
             $.get(`${href}`).done(function(data){
                 $('.pagination').remove();
                 $('#list-product').append(data);
