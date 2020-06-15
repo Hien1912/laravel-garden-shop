@@ -1,18 +1,18 @@
 $(document).ready(() => {
-    $('#qty-minus').click(() => {
-        let val = +$("#qty-val").val();
-        if (val > 1) {
-            $("#qty-val").val(--val);
+    $('.qty-minus').click(function () {
+        let val = +$(this).siblings('input').val();
+        let id = $(this).siblings('input').data('id');
+        if (val-- > 1) {
+            Obj.cartUpdate(id, val);
         }
     });
 
-    $('#qty-plus').click(() => {
-        let val = $("#qty-val").val();
-        console.log("val", val);
-        let max = $("#qty-val").attr('max');
-        console.log("max", max);
-        if (val < max && val < 10) {
-            $("#qty-val").val(++val);
+    $('.qty-plus').click(function () {
+        let val = +$(this).siblings('input').val();
+        let id = $(this).siblings('input').data('id');
+        let max = +$(this).siblings('input').attr('max');
+        if (val < 10 && val++ < max) {
+            Obj.cartUpdate(id, val);
         }
     });
 });

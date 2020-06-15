@@ -97,7 +97,8 @@ header div a:hover {
 
 main {
   background-color: #EEE;
-  min-height: 100%;
+  min-height: 80vh;
+  height: 100%;
 }
 
 main > .container {
@@ -153,7 +154,7 @@ main > .container {
   color: red !important;
 }
 
-#show-all-product [class^="col"], #sp-lienquan [class^="col"] {
+#show-all-product, #sp-lienquan {
   padding: 0 5px;
 }
 
@@ -214,8 +215,12 @@ main > .container {
   font-size: 1.25em;
 }
 
-#show-all-product .card-footer .btn-shopping:hover, #sp-lienquan .card-footer .btn-shopping:hover {
-  color: #dc3545 !important;
+#show-all-product .card-footer .btn-shopping, #sp-lienquan .card-footer .btn-shopping {
+  outline: none;
+}
+
+#show-all-product .card-footer .btn, #sp-lienquan .card-footer .btn {
+  outline: none;
 }
 
 .product-details .img-details {
@@ -294,16 +299,10 @@ footer {
   min-width: 65px;
   max-width: 65px;
   height: 65px !important;
-  margin: 0;
   padding: 0;
   -o-object-fit: cover;
      object-fit: cover;
   width: 100%;
-}
-
-.cart-details .row, .cart-details .col {
-  margin: 0;
-  padding: 0;
 }
 
 .cart-details .btn-group input {
@@ -312,12 +311,23 @@ footer {
   outline: none;
 }
 
-.cart-details #qty-val {
+.cart-details .qty-val {
   max-width: 50px;
+}
+
+.total span {
+  display: block;
+  font-weight: 600;
 }
 
 @media screen and (max-width: 600px) {
   .cart-details * {
     font-size: .9em;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .col-lg-4 {
+    padding: 5px;
   }
 }

@@ -5,6 +5,9 @@ Obj.cart = function (id, qty = 1) {
     $.ajax({
         url: `${url}`,
         method: "post",
+        async: false,
+        cache: false,
+        timeout: 30000,
         success: function (res) {
             Obj.cartSuccess(res);
         },
@@ -14,6 +17,82 @@ Obj.cart = function (id, qty = 1) {
     });
 }
 
+Obj.cartUpdate = (id, qty) => {
+    let url = location.origin + `/san-pham-${id}/add-${qty}`;
+    $.ajax({
+        url: `${url}`,
+        method: "post",
+        async: false,
+        cache: false,
+        timeout: 30000,
+        success: function (res) {
+            Obj.cartSuccess(res);
+            $(`[data-id="${id}"]`).val(qty);
+            $('#totalPrice').html(Obj.currency(res.price));
+            $('#totalQty').html(res.qty);
+        },
+        error: function (res) {
+            Obj.error(res);
+        }
+    });
+}
+
+Obj.cartDelete = function (id) {
+    let url = location.origin + `/san-pham-${id}/delete`;
+    $.ajax({
+        url: url,
+        method: 'delete',
+        async: false,
+        cache: false,
+        timeout: 30000,
+        success: function (res) {
+            $(`#row-${id}`).remove();
+            $('#shopping-cart').html(`(${res.qty})`);
+            $('#totalPrice').html(Obj.currency(res.price));
+            $('#totalQty').html(res.qty);
+            if (!$('.cart-details').html()) {
+                location.reload();
+            }
+        }, error: function (res) {
+            Obj.error(res);
+        }
+    });
+}
+
+Obj.cartOrder = function () {
+    let data = new FormData($('#form-order')[0]);
+    let url = $('#form-order').attr('action');
+    $.ajax({
+        url: url,
+        method: 'post',
+        processData: false,
+        contentType: false,
+        data: data,
+        success: function (res) {
+
+        },
+        error: function (res) {
+            $('#form-order input').removeClass(['is-valid', 'is-invalid']);
+            $('#form-order small').remove();
+            if (res.status == 422) {
+                $('#form-order input').addClass('is-valid');
+                let errors = res.responseJSON.errors;
+                $.each(errors, function (k, v) {
+                    $(`[name=${k}]`).removeClass('in-valid').addClass('is-invalid').after(`
+                        <small class="text-danger">
+                            <i>${v[0]}</i>
+                        </small>
+                    `);
+
+                });
+            }
+        }
+    });
+}
+
+Obj.currency = function (number) {
+    return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(number)
+}
 
 Obj.nextPage = function (page) {
     let href = location.origin;
@@ -32,13 +111,11 @@ Obj.cartSuccess = function (res, qty) {
     $.toast({
         text: res.name + `đã được ${text} thành công.`,
         heading: `${head} giỏ hàng`,
-        icon: "none",
+        icon: "success",
         showHideTransition: "plain",
         hideAfter: 5000,
         stack: 1,
         position: "top-center",
-        loader: true,
-        loaderBg: "#17a2b8"
     });
 
     $('#shopping-cart').html(`(${res.qty})`);
@@ -77,6 +154,7 @@ Obj.notification = function () {
     });
 }
 
+
 $(document).ready(function () {
     $.ajaxSetup({
         headers: {
@@ -85,3 +163,12 @@ $(document).ready(function () {
     });
 
 });
+
+$(document).ajaxStart(function () {
+    $("#loading").show();
+});
+
+$(document).ajaxStop(function () {
+    $("#loading").hide();
+});
+

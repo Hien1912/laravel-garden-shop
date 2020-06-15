@@ -13,7 +13,7 @@
             <span class="d-block">
                 Giá:&nbsp;<i class="product-price">@money($product->price, 'VND')</i>
             </span>
-            <button title="Thêm vào giỏ hàng" class="btn btn-shopping ml-auto text-warning" onclick="Obj.cart({{ $product->id }})">
+            <button title="Thêm vào giỏ hàng" class="btn btn-shopping btn-sm btn-outline-success ml-auto" onclick="Obj.cart({{ $product->id }})">
                 <span class="fa fa-2x fa-cart-plus"></span>
             </button>
         </div>

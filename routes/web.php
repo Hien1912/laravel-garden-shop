@@ -14,15 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index')->name('home-page');
 Route::get('/paginate', 'HomeController@paginate');
 Route::get("/san-pham-{id}", "HomeController@details")->name('product-details');
-Route::post("/san-pham-{id}/add-{qty}", function ($id, $qty) {
-    return $id;
-});
+Route::get('/shopping-cart', 'CartController@index')->name('shopping-cart');
 Route::post("/san-pham-{id}/add-{qty}", "CartController@add")->name('add-shopping-cart');
-Route::put("/san-pham-{id}/add-{qty}", "CartController@update")->name("ud-shopping-cart");
-
+Route::delete("/san-pham-{id}/delete", "CartController@delete")->name("del-shopping-cart");
+Route::get('/dat-hang', 'CartController@order')->name('dat-hang');
 Auth::routes();
 
 /**
@@ -30,14 +28,7 @@ Auth::routes();
  */
 
 
-Route::post('/dat-hang', 'CartController@store')->name('dat-hang');
-
-Route::group(['prefix' => '/shopping-cart'], function () {
-    Route::get('/', 'CartController@index')->name('get-cart');
-    Route::post('/add-{id}/{qty?}', 'CartController@add')->name('add-to-cart');
-    Route::put('/update-{id}/{qty?}', 'CartController@add')->name('add-to-cart');
-    Route::delete('/delete-{id}', 'CartController@delete')->name('delete-product-from-cart');
-});
+Route::post('/check-out', 'CartController@store')->name('check-out');
 
 
 Route::view('/home', 'shops.index')->name('home');
