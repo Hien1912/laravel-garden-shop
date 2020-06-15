@@ -38,8 +38,9 @@ Obj.cartSuccess = function (res, qty) {
         stack: 1,
         position: "top-center",
         loader: true,
-        loaderBg: "#aaaa"
+        loaderBg: "#17a2b8"
     });
+
     $('#shopping-cart').html(`(${res.qty})`);
 }
 
