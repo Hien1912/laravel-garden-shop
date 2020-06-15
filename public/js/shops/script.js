@@ -105,7 +105,7 @@ Obj.nextPage = function (page) {
     });
 }
 
-Obj.cartSuccess = function (res, qty) {
+Obj.cartSuccess = function (res) {
     let head = res.msg ? "Cập nhật" : 'Thêm';
     let text = res.msg ? "cập nhật" : 'thêm';
     $.toast({

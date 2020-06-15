@@ -25,7 +25,7 @@ $(document).ready(() => {
     });
 
     $('.product-shopping').on('click', '.btn', function () {
-        let qty = $('#qty').val();
+        let qty = +$('#qty').val();
         let id = $("#qty").data('id');
         Obj.cart(id, qty);
     });

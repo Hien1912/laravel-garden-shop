@@ -41,7 +41,7 @@ class CartController extends Controller
                 $msg = 1;
             }
         } else {
-            Cart::add($id, $product, $product->price, 1);
+            Cart::add($id, $product, $product->price, $qty);
             $msg = 0;
         }
 
