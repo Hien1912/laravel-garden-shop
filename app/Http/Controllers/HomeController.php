@@ -21,15 +21,12 @@ class HomeController extends Controller
         $tag = $request->tag;
         if ($search) {
             $products = Product::where('name', 'like', "%$search%")->paginate();
-        }
-        elseif ($category) {
+        } elseif ($category) {
             $products = Category::find($category)->products()->paginate();
-        }
-        elseif($tag){
+        } elseif ($tag) {
             $products = Tag::find($tag)->products()->paginate();
-        }
-        else{
-            $products =  Product::paginate(12);
+        } else {
+            $products =  Category::find(1)->products()->paginate(12);
         }
 
         $category = Category::all();
@@ -44,17 +41,21 @@ class HomeController extends Controller
         $tag = $request->tag;
         if ($search) {
             $products = Product::where('name', 'like', "%$search%")->paginate();
-        }
-        elseif ($category) {
+        } elseif ($category) {
             $products = Category::find($category)->products()->paginate();
-        }
-        elseif($tag){
+        } elseif ($tag) {
             $products = Tag::find($tag)->products()->paginate();
-        }
-        else{
-            $products =  Product::paginate(12);
+        } else {
+            $products =  Category::find(1)->products()->paginate(12);
         }
 
-        return view('shops.list', compact('products'));
+        return view('shops.partial.product', compact("products"));
+    }
+
+    public function details($id)
+    {
+        $product = Product::find($id);
+
+        return view('shops.details', compact("product"));
     }
 }

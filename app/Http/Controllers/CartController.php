@@ -12,49 +12,57 @@ use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
-    protected $cart = [];
-
-    public function __construct()
-    {
-        $this->middleware(function ($request, $next) {
-            if (session()->has('cart')) {
-                $this->cart = session()->pull('cart');
-            }
-            
-            return $next($request);
-        });
-    }
-
     public function index()
     {
         return view('shops.cart');
     }
 
-    public function add(Request $request)
+    public function add($id, $qty)
     {
-        $product = Product::find($request->id);
-        Cart::add([
-            'id' => $request->id, 
-            'name' => $product->name, 
-            'price' => $product->price, 
-            'quantity' => $request->qty,
-            'attributes' => [
+        $product = Product::find($id);
+        $cart = Cart::get($id);
+        if ($cart) {
+            Cart::update($id, [
+                'quantity' => [
+                    'relative' => false,
+                    'value' => $qty
+                ]
+            ]);
+            $msg = 1;
+        } else {
+            Cart::add($id, $product->name, $product->price, 1, [
                 'avatar' => $product->avatar,
                 'amount' => $product->amount
-            ]
-        ]);
+            ]);
+
+            dd(13131);
+            $msg = 0;
+        }
+
+        $totalQty = Cart::getTotalQuantity();
+        $total = Cart::getTotal();
+        $data = ["name" => $product->name, "qty" => $totalQty,  'price' => $total, "msg" => $msg];
+
+        return response()->json($data, 200);
     }
 
-    public function update(Request $request)
+    public function update($id, $qty)
     {
-        Cart::update($request->id, [
+        $id = substr($id, 4, $id[3]);
+        $product = Cart::update($id, [
             'quantity' => [
-            'relative' => false,
-            'value' => $request->quantity
+                'relative' => false,
+                'value' => $qty
             ]
         ]);
 
-        // return back();
+        $name = Cart::get($id)->name;
+        $totalQty = Cart::getTotalQuantity();
+        $total = Cart::getTotal();
+
+        $data = ["name" => $name, "qty" => $totalQty, "price" => $total, 'msg' => 1];
+
+        return response()->json($product, 200);
     }
 
     public function delete($id)
@@ -68,9 +76,8 @@ class CartController extends Controller
         $order->totalquantity = Cart::getTotalQuantity();
         $order->total = Cart::getTotal();
         $order->save();
-        foreach(Cart::getContent() as $product)
-        {
-            $order->products()->attach(Product::find($product->id), ['quantity'=>$product->quantity, 'price'=>$product->price]);
+        foreach (Cart::getContent() as $product) {
+            $order->products()->attach(Product::find($product->id), ['quantity' => $product->quantity, 'price' => $product->price]);
         }
 
         $order->Address()->create($request->all());
