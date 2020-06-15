@@ -14,7 +14,8 @@ class CartController extends Controller
 {
     public function index()
     {
-        return view('shops.cart');
+        $carts = Cart::getContent();
+        return view('shops.cart', compact('carts'));
     }
 
     public function add($id, $qty)
@@ -30,12 +31,7 @@ class CartController extends Controller
             ]);
             $msg = 1;
         } else {
-            Cart::add($id, $product->name, $product->price, 1, [
-                'avatar' => $product->avatar,
-                'amount' => $product->amount
-            ]);
-
-            dd(13131);
+            Cart::add($id, $product, $product->price, 1);
             $msg = 0;
         }
 
@@ -44,25 +40,6 @@ class CartController extends Controller
         $data = ["name" => $product->name, "qty" => $totalQty,  'price' => $total, "msg" => $msg];
 
         return response()->json($data, 200);
-    }
-
-    public function update($id, $qty)
-    {
-        $id = substr($id, 4, $id[3]);
-        $product = Cart::update($id, [
-            'quantity' => [
-                'relative' => false,
-                'value' => $qty
-            ]
-        ]);
-
-        $name = Cart::get($id)->name;
-        $totalQty = Cart::getTotalQuantity();
-        $total = Cart::getTotal();
-
-        $data = ["name" => $name, "qty" => $totalQty, "price" => $total, 'msg' => 1];
-
-        return response()->json($product, 200);
     }
 
     public function delete($id)

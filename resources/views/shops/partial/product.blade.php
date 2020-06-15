@@ -13,7 +13,7 @@
             <span class="product-price d-block">
                 @money($product->price, 'VND')
             </span>
-            <button class="btn btn-shopping ml-auto text-primary" onclick="Obj.cart(this)" data-url="{{ route("add-shopping-cart", [$product->id, 1]) }}">
+            <button class="btn btn-shopping ml-auto text-primary" onclick="Obj.cart({{ $product->id }})">
                 <span class="fa fa-2x fa-cart-plus"></span>
             </button>
         </div>

@@ -285,3 +285,39 @@ main > .container {
 footer {
   min-height: 100px;
 }
+
+.price {
+  color: red;
+}
+
+.cart-details > img {
+  min-width: 65px;
+  max-width: 65px;
+  height: 65px !important;
+  margin: 0;
+  padding: 0;
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100%;
+}
+
+.cart-details .row, .cart-details .col {
+  margin: 0;
+  padding: 0;
+}
+
+.cart-details .btn-group input {
+  border: 0;
+  text-align: center;
+  outline: none;
+}
+
+.cart-details #qty-val {
+  max-width: 50px;
+}
+
+@media screen and (max-width: 600px) {
+  .cart-details * {
+    font-size: .9em;
+  }
+}

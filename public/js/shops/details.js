@@ -15,18 +15,18 @@ $(document).ready(() => {
         }
     });
 
-    $('#qty').on('input', function(){
+    $('#qty').on('input', function () {
         let val = $(this).val();
         let max = +$('#qty').attr('max');
-        if(val<1)
+        if (val < 1)
             $(this).val(1);
-        if(val>max)
+        if (val > max)
             $(this).val(max);
     });
 
-    $('.product-shopping').on('click', '.btn', function(){
+    $('.product-shopping').on('click', '.btn', function () {
         let qty = $('#qty').val();
-        let id = location.pathname.split('-')[2];
+        let id = $("#qty").data('id');
         Obj.cart(id, qty);
     });
 });

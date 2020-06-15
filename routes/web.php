@@ -17,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@index');
 Route::get('/paginate', 'HomeController@paginate');
 Route::get("/san-pham-{id}", "HomeController@details")->name('product-details');
+Route::post("/san-pham-{id}/add-{qty}", function ($id, $qty) {
+    return $id;
+});
 Route::post("/san-pham-{id}/add-{qty}", "CartController@add")->name('add-shopping-cart');
 Route::put("/san-pham-{id}/add-{qty}", "CartController@update")->name("ud-shopping-cart");
 

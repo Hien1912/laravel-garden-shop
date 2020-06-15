@@ -20,7 +20,7 @@
             </div>
             <div class="product-cart">
                 <span class="product-minus btn btn-sm">-</span>
-                <input class="form-control-sm" id="qty" min="1" max="{{ $product->amount }}" type="number" value="1">
+                <input class="form-control-sm" id="qty" data-id="{{ $product->id }}" min="1" max="{{ $product->amount }}" type="number" value="1">
                 <span class="product-plus btn btn-sm">+</span>
             </div>
             <div class="product-shopping mt-4">

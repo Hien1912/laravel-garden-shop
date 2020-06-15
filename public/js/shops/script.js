@@ -1,7 +1,7 @@
 let Obj = {} || Obj;
 
-Obj.cart = function (url) {
-    console.log(url);
+Obj.cart = function (id, qty = 1) {
+    let url = location.origin + `/san-pham-${id}/add-${qty}`;
     $.ajax({
         url: `${url}`,
         method: "post",
@@ -81,11 +81,6 @@ $(document).ready(function () {
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
-    });
-
-    $('.btn-shopping').click(function() {
-        let url = $(this).data('url');
-        Obj.cart(url);
     });
 
 });
