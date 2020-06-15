@@ -10,7 +10,7 @@
             </a>
         </div>
         <div class="card-footer mt-auto d-flex justify-content-between align-items-center">
-            <span class="product-price d-block">
+            Giá: <span class="product-price d-block">
                 @money($product->price, 'VND')
             </span>
             <button class="btn btn-shopping ml-auto text-primary" onclick="Obj.cart({{ $product->id }})">
