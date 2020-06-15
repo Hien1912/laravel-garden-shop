@@ -21,6 +21,8 @@ Route::get('/shopping-cart', 'CartController@index')->name('shopping-cart');
 Route::post("/san-pham-{id}/add-{qty}", "CartController@add")->name('add-shopping-cart');
 Route::delete("/san-pham-{id}/delete", "CartController@delete")->name("del-shopping-cart");
 Route::get('/dat-hang', 'CartController@order')->name('dat-hang');
+Route::post('/check-out', 'CartController@store')->name('check-out');
+
 Auth::routes();
 
 /**
@@ -28,7 +30,6 @@ Auth::routes();
  */
 
 
-Route::post('/check-out', 'CartController@store')->name('check-out');
 
 
 Route::view('/home', 'shops.index')->name('home');
