@@ -32,10 +32,6 @@
   color: red !important;
 }
 
-.shopping-cart:hover::before {
-  content: url("../../images/hover/shopping-cart.svg");
-}
-
 header {
   height: 40px;
 }
