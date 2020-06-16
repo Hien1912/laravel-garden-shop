@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Address;
 use App\Http\Requests\AddressRequest;
+use App\Mail\OrderMail;
 use App\Order;
 use App\Product;
 use Illuminate\Http\Request;
-use Cart;
+use Darryldecode\Cart\Facades\CartFacade as Cart;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class CartController extends Controller
 {
@@ -83,12 +85,23 @@ class CartController extends Controller
             }
 
             $order->Address()->create($request->all());
-            Cart::clear();
+            // Cart::clear();
 
             $details = DB::table('orderdetails')->where('order_number', '=', $order->id)->get();
             $address = $order->Address;
 
-            return view('shops.checkout', compact(['details', 'address', 'order']));
+            $data = $request->all();
+            $data['totalQty'] = Cart::getTotalQuantity();
+            $data['totalPrice'] = Cart::getTotal();
+
+            Mail::to("$request->email")->send(new OrderMail($carts, $data));
+
+            return response()->view('shops.checkout', compact('details', 'address', 'order'), 200);
         }
+    }
+
+    private function sendmail($details)
+    {
+        Mail::to('hienvh00@gmail.com')->send(new OrderMail($details));
     }
 }

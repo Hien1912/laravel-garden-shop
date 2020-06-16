@@ -1,11 +1,5 @@
 @extends('layouts.shops')
 @section('content')
-<style>
-	img.image {
-		width: 150px;
-		height: 100px;
-	}
-</style>
 <main class="page shopping-cart-page">
 	<section class="clean-block clean-cart dark">
 		<div class="container">
