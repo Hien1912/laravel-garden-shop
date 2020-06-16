@@ -34,6 +34,6 @@ class OrderMail extends Mailable
     {
         return $this->subject("Đặt hàng thành công")
             ->view('emails.order')
-            ->with(["carts", $this->carts, 'data' => $this->data]);
+            ->with(["carts" => $this->carts, 'data' => $this->data]);
     }
 }
