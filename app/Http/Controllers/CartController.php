@@ -85,10 +85,7 @@ class CartController extends Controller
             }
 
             $order->Address()->create($request->all());
-            // Cart::clear();
-
-            $details = DB::table('orderdetails')->where('order_number', '=', $order->id)->get();
-            $address = $order->Address;
+            Cart::clear();
 
             $data = $request->all();
             $data['totalQty'] = Cart::getTotalQuantity();
@@ -96,12 +93,7 @@ class CartController extends Controller
 
             Mail::to("$request->email")->send(new OrderMail($carts, $data));
 
-            return response()->view('shops.checkout', compact('details', 'address', 'order'), 200);
+            return response()->view('shops.partial.checkout');
         }
-    }
-
-    private function sendmail($details)
-    {
-        Mail::to('hienvh00@gmail.com')->send(new OrderMail($details));
     }
 }

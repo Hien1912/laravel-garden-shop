@@ -69,7 +69,7 @@ Obj.cartOrder = function () {
         contentType: false,
         data: data,
         success: function (res) {
-
+            $('#checkout').html(res);
         },
         error: function (res) {
             $('#form-order input').removeClass(['is-valid', 'is-invalid']);
@@ -85,6 +85,8 @@ Obj.cartOrder = function () {
                     `);
 
                 });
+            } else {
+                Obj.error(res);
             }
         }
     });
@@ -161,14 +163,14 @@ $(document).ready(function () {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+    
+    $(document).ajaxStart(function () {
+        $("#ajax-request").modal('show');
+    });
 
+    $(document).ajaxStop(function () {
+        $("#ajax-request").modal('hide');
+    });
 });
 
-$(document).ajaxStart(function () {
-    $("#loading").show();
-});
-
-$(document).ajaxStop(function () {
-    $("#loading").hide();
-});
 

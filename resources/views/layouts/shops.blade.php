@@ -24,6 +24,8 @@
             </div>
         </div>
     </div>
+    <div class="modal" id="ajax-request" data-backdrop="static" data-keyboard="false">
+    </div>
     @include('layouts.shop_partial.footer')
 </body>
 @include('layouts.shop_partial.js')

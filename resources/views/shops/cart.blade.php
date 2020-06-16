@@ -1,6 +1,6 @@
 @extends('layouts.shops')
 @section('content')
-<div class="container mt-5 mx-auto row">
+<div class="container mt-5 mx-auto row" id="checkout">
 	@if(count($carts) > 0)
 		<div class="mx-auto col-12 col-lg-8" id="list-cart">
 			@foreach ($carts as $product)
@@ -57,6 +57,9 @@
 	</div>
 </div>
 @endsection
+@push('css')
+	<link rel="stylesheet" href="./css/shops/checkout.css">
+@endpush
 @push('js')
 	<script src="./js/shops/cart.js"></script>
 @endpush

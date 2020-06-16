@@ -12,7 +12,7 @@
 <body>
     <div>
         <h2>Đặt hàng thành công</h2>
-        <p>Cảm ơn bạn đã đặt hàng tại GardernShop</p>
+        <p>Cảm ơn bạn đã đặt hàng tại GardenShop</p>
     </div>
     <div style="margin: 20px auto">
         <h2>Chi tiết đơn hàng của bạn</h2>
