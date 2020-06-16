@@ -11,11 +11,11 @@
 </style>
 <body>
     <div>
-        <h4>Đặt hàng thành công</h4>
+        <h2>Đặt hàng thành công</h2>
         <p>Cảm ơn bạn đã đặt hàng tại GardernShop</p>
     </div>
     <div style="margin: 20px auto">
-        <h3>Chi tiết đơn hàng của bạn</h3>
+        <h2>Chi tiết đơn hàng của bạn</h2>
     </div>
     <table style="border-top: 1px solid;border-bottom: 1px solid; border-collapse: collapse">
         <thead style="border-bottom: 1px solid">
