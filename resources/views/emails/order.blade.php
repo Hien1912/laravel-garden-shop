@@ -18,7 +18,7 @@
         <h3>Chi tiết đơn hàng của bạn</h3>
     </div>
     <table style="border-top: 1px solid;border-bottom: 1px solid; border-collapse: collapse">
-        <thead>
+        <thead style="border-bottom: 1px solid">
             <th>#</th>
             <th>Tên sản phẩm</th>
             <th>Giá</th>
@@ -34,25 +34,25 @@
                 <td>
                     {{ $cart->name->name }}
                 </td>
-                <td>
-                    {{ $cart->price }}
+                <td style="text-align: right">
+                    @money($cart->price, "VND")
                 </td>
-                <td>
+                <td style="text-align: right">
                     {{ $cart->quantity }}
                 </td>
-                <td colspan="2">
+                <td colspan="2" style="text-align: right">
                     @money($cart->quantity * $cart->price, "VND")
                 </td>
             </tr>
         @endforeach
         </tbody>
-        <tfoot>
+        <tfoot style="border-top:1px solid">
             <tr>
                 <th colspan="3">
                     <h3>Tổng</h3>
                 </th>
-                <th>Số lượng: {{ $data["totalQty"] }}</th>
-                <th colspan="2">Thanh toán: @money($data['totalPrice'])</th>
+                <th style="text-align: right">Số lượng: {{ $data["totalQty"] }}</th>
+                <th colspan="2" style="text-align: right">Thanh toán: @money($data['totalPrice'])</th>
             </tr>
         </tfoot>
     </table>
