@@ -10,7 +10,21 @@
 
 </style>
 <body>
-    <table class="table table-light">
+    <div>
+        <h4>Đặt hàng thành công</h4>
+        <p>Cảm ơn bạn đã đặt hàng tại GardernShop</p>
+    </div>
+    <div style="margin: 20px auto">
+        <h3>Chi tiết đơn hàng của bạn</h3>
+    </div>
+    <table style="border-top: 1px solid;border-bottom: 1px solid; border-collapse: collapse">
+        <thead>
+            <th>#</th>
+            <th>Tên sản phẩm</th>
+            <th>Giá</th>
+            <th>Số lượng</th>
+            <th>Tổng</th>
+        </thead>
         <tbody>
         @foreach ($carts as $cart)
             <tr>
@@ -21,12 +35,12 @@
                     {{ $cart->name->name }}
                 </td>
                 <td>
-                    {{ $cart->quantity }}
-                </td>
-                <td>
                     {{ $cart->price }}
                 </td>
                 <td>
+                    {{ $cart->quantity }}
+                </td>
+                <td colspan="2">
                     @money($cart->quantity * $cart->price, "VND")
                 </td>
             </tr>
@@ -34,11 +48,11 @@
         </tbody>
         <tfoot>
             <tr>
-                <th colspan="2">
-                    <h3>Tổng:</h3>
+                <th colspan="3">
+                    <h3>Tổng</h3>
                 </th>
-                <th>Số lượng{{ $data["totalQty"] }}</th>
-                <th colspan="2">Tổng thanh toán: @money($data['totalPrice'])</th>
+                <th>Số lượng: {{ $data["totalQty"] }}</th>
+                <th colspan="2">Thanh toán: @money($data['totalPrice'])</th>
             </tr>
         </tfoot>
     </table>
