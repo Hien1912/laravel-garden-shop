@@ -35,27 +35,27 @@ Route::group(['prefix' => '/'], function () {
 /**
  * Admin
  */
-// Route::group(['middleware' => 'auth'], function () {
-    // Route::get("/dashboard", "DashboardController@index")->name('dashboard');
+Route::group(['middleware' => 'auth'], function () {
+    Route::get("/dashboard", "DashboardController@index")->name('dashboard');
     Route::get('/san-pham/{category_id}', "ProductController@index")->name('san-pham');
-    // Route::get('/don-hang/{status}', "OrderController@index")->name('don-hang');
+    Route::get('/don-hang/{status}', "OrderController@index")->name('don-hang');
 
-    // Route::group(['middleware' => 'ajax', "prefix" => "/ajax"], function () {
-    //     Route::group(['prefix' => '/product', "as" => "product."], function () {
-    //         Route::get('/{category_id}', "ProductController@getByCategoryId")->name('getByCategoryId');
-    //         Route::get("/find-{id}", "ProductController@findById")->name('findById');
-    //         Route::post("/", "ProductController@create")->name(".create");
-    //         Route::put("/restore-{id}", "ProductController@restore")->name('restore');
-    //         Route::put("/update-{id}", "ProductController@update")->name('update');
-    //         Route::delete("/delete-{id}", "ProductController@delete")->name('delete');
-    //         Route::delete("/destroy-{id}", "ProductController@destroy")->name('destroy');
-    //     });
+    Route::group(['middleware' => 'ajax', "prefix" => "/ajax"], function () {
+        Route::group(['prefix' => '/product', "as" => "product."], function () {
+            Route::get('/thung-rac', "ProductController@getTrash")->name('getTrash');
+            Route::get("/find-{id}", "ProductController@findById")->name('findById');
+            Route::get('/{category_id}', "ProductController@getByCategoryId")->name('getByCategoryId');
+            Route::post("/", "ProductController@create")->name(".create");
+            Route::put("/restore-{id}", "ProductController@restore")->name('restore');
+            Route::put("/update-{id}", "ProductController@update")->name('update');
+            Route::delete("/delete-{id}", "ProductController@delete")->name('delete');
+            Route::delete("/destroy-{id}", "ProductController@destroy")->name('destroy');
+        });
 
-    //     Route::group(['prefix' => '/order', "as" => "order."], function () {
-    //         Route::get("/{status}", "OrderController@getByStatus")->name('getByStatus');
-    //         Route::get("/find-{id}", "OrderController@getById")->name('findById');
-    //         Route::post("/", "OrderController@create")->name("create");
-    //         Route::put("/update-{id}", "OrderController@update")->name('update');
-    //     });
-    // });
-// });
+        Route::group(['prefix' => '/order', "as" => "order."], function () {
+            Route::get("/{status}", "OrderController@getByStatus")->name('getByStatus');
+            Route::get("/find-{id}", "OrderController@getById")->name('findById');
+            Route::put("/update-{id}", "OrderController@update")->name('update');
+        });
+    });
+});

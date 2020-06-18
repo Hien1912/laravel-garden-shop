@@ -48,12 +48,8 @@ App.uri = {
 };
 
 App.breadcrumb = function () {
-    // $(`[href="${location.pathname}"]`).addClass('active');
     let array = location.pathname.split("/");
     let uri = array.slice(1, array.length);
-    // if (uri.length > 1) {
-    //     $(`div[id^="${uri[0]}"]`).collapse('toggle');
-    // }
     uri.forEach(v => {
         $('header .breadcrumb').append(`
             <li class="breadcrumb-item">${App.uri[v]}</li>

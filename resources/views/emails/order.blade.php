@@ -29,7 +29,8 @@
         @foreach ($carts as $cart)
             <tr>
                 <td>
-                    <img src="{{ $message->embed(asset("images/products/" . $cart->name->avatar . "")) }}" width="75px" height="75px">
+                    {{-- <img src="{{ $message->embed(asset("images/products/" . $cart->name->avatar . "")) }}" width="75px" height="75px"> --}}
+                    <img src="{{ asset("images/products/" . $cart->name->avatar . "") }}" width="75px" height="75px">
                 </td>
                 <td>
                     {{ $cart->name->name }}
@@ -52,7 +53,7 @@
                     <h3>Tổng</h3>
                 </th>
                 <th style="text-align: right">Số lượng: {{ $data["total_quantity"] }}</th>
-                <th colspan="2" style="text-align: right">Thanh toán: @money($data['total_price'])</th>
+                <th colspan="2" style="text-align: right">Thanh toán: @money($data['total_price'],"VND")</th>
             </tr>
         </tfoot>
     </table>
