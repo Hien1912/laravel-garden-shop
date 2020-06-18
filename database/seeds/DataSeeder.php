@@ -16,37 +16,37 @@ class DataSeeder extends Seeder
      */
     public function run()
     {
-        $user = new User();
-        $user->name = 'Admin';
-        $user->email = 'admin@ad.min';
-        $user->password = bcrypt('12345678');
-        $user->save();
+        User::insert([
+            ['name' => "Admin", "email" => "admin@ad.min", "password" => bcrypt(12345678)],
+            ['name' => "Admin1", "email" => "mmdev1912@gmail.com", "password" => bcrypt("Mk1234321")],
+        ]);
 
-        $bonsai = new Category(['name'=>"Cây cảnh"]);
-        $bonsai->save();
-        $pot = new Category(['name'=> 'Chậu cảnh']);
-        $pot->save();
-        $accessories = new Category(['name'=> 'Phụ kiện']);
-        $accessories->save();
+        Category::insert([
+            ['id' => 'cay-canh', "name" => "Cây cảnh"],
+            ['id' => 'chau-canh', "name" => "Chậu cảnh"],
+            ['id' => 'phu-kien', "name" => "Phụ kiện"]
+        ]);
 
-        $bonsai->tags()->create(['name' => 'Cây cảnh để bàn']);
-        $bonsai->tags()->create(['name' => 'Cây thủy sinh']);
-        $bonsai->tags()->create(['name' => 'Sen đá, xương rồng']);
-        $bonsai->tags()->create(['name' => 'Cây chậu treo']);
+        Tag::insert([
+            ['id' => "cay-canh-de-ban", 'name' => 'Cây cảnh để bàn', 'category_id' => "cay-canh"],
+            ['id' => 'cay-thuy-sinh', 'name' => 'Cây thủy sinh', 'category_id' => "cay-canh"],
+            ['id' => 'sen-da-xuong-rong', 'name' => 'Sen đá, xương rồng', 'category_id' => "cay-canh"],
+            ['id' => 'cay-chau-treo', 'name' => 'Cây chậu treo', 'category_id' => "cay-canh"],
+            ['id' => 'chau-dat-nung', 'name' => 'Chậu đất nung', 'category_id' => 'chau-canh'],
+            ['id' => 'chau-xi-mang', 'name' => 'Chậu xi măng', 'category_id' => 'chau-canh'],
+            ['id' => 'chau-composite', 'name' => 'Chậu composite', 'category_id' => 'chau-canh'],
+            ['id' => 'chau-men-su', 'name' => 'Chậu men sứ', 'category_id' => 'chau-canh'],
+            ['id' => 'chau-nhua-ABS', 'name' => 'Chậu nhựa ABS', 'category_id' => 'chau-canh'],
+            ['id' => 'dat-trong-phan-bon', 'name' => 'Đất trồng, phân bón', 'category_id' => "phu-kien"],
+            ['id' => 'dung-cu-lam-vuon', 'name' => 'Dụng cụ làm vườn', 'category_id' => "phu-kien"],
+            ['id' => 'dung-dich-thuy-sinh', 'name' => 'Dung dịch thủy sinh', 'category_id' => "phu-kien"],
+            ['id' => 'vat-trang-tri', 'name' => 'Vật trang trí', 'category_id' => "phu-kien"]
+        ]);
 
-        $pot->tags()->create(['name' => 'Chậu đất nung']);
-        $pot->tags()->create(['name' => 'Chậu xi măng']);
-        $pot->tags()->create(['name' => 'Chậu composite']);
-        $pot->tags()->create(['name' => 'Chậu men sứ']);
-        $pot->tags()->create(['name' => 'Chậu nhựa ABS']);
-
-        $accessories->tags()->create(['name' => 'Đất trồng, phân bón']);
-        $accessories->tags()->create(['name' => 'Dụng cụ làm vườn']);
-        $accessories->tags()->create(['name' => 'Dung dịch thủy sinh']);
-        $accessories->tags()->create(['name' => 'Vật trang trí']);
-
-        factory(App\Product::class, 100)->create()->each(function($product){
-            $product->tags()->attach(Tag::find(random_int(1,13)));
+        $tag = Tag::all(['id']);
+        factory(App\Product::class, 100)->create()->each(function ($product) use ($tag) {
+            $tag = $tag[random_int(0, 12)];
+            $product->tags()->attach($tag);
         });
     }
 }

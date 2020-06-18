@@ -15,22 +15,16 @@ class CreateProductsTable extends Migration
     public function up()
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->id();
+            $table->unsignedInteger('id', true);
             $table->string('name')->unique();
             $table->longText('avatar');
-            $table->text('description')->nullable()->default(null);
-            $table->integer('price');
+            $table->longText('description')->nullable()->default(null);
+            $table->unsignedInteger('price');
             $table->longText('details')->nullable()->default(null);
-            $table->Integer('amount')->default(0);
-            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
+            $table->unsignedInteger('amount')->default(0);
+            $table->string('category_id');
             $table->softDeletes();
             $table->timestamps();
-        });
-
-        Schema::create('tag_product', function (Blueprint $table) {
-            $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
-            $table->foreignId('tag_id')->constrained('tags')->onDelete('cascade');
-            $table->primary(['product_id', 'tag_id']);
         });
     }
 
@@ -41,7 +35,6 @@ class CreateProductsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tag_product');
         Schema::dropIfExists('products');
     }
 }

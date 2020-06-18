@@ -1,5 +1,4 @@
 @include('layouts.shop_partial.css')
-{{-- <body oncontextmenu="return false"> --}}
 <body>
     @include("layouts.shop_partial.header")
     @include("layouts.shop_partial.nav")

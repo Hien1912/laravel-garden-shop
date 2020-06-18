@@ -1,6 +1,9 @@
 @extends('layouts.admin')
 @section('content')
-<div class="container-fluid mt-5">
+@if($sidebar['dashboard']) 
+    <div class="alert alert-danger">hahahaahaha</div>
+@endif
+{{-- <div class="container-fluid mt-5">
     <div class="card mb-4 wow fadeIn">
         <div class="card-body d-sm-flex justify-content-between">
             <h4 class="mb-2 mb-sm-0 pt-1">
@@ -133,5 +136,5 @@
             }
         });
     }
-</script>
+</script> --}}
 @endsection

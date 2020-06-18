@@ -2,60 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
-use App\Product;
-use App\Tag;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(Request $request)
+    public function index()
     {
-        $search = $request->search;
-        $category = $request->category;
-        $tag = $request->tag;
-        if ($search) {
-            $products = Product::where('name', 'like', "%$search%")->paginate();
-        } elseif ($category) {
-            $products = Category::find($category)->products()->paginate();
-        } elseif ($tag) {
-            $products = Tag::find($tag)->products()->paginate();
-        } else {
-            $products =  Category::find(1)->products()->paginate(12);
-        }
-
-        $category = Category::all();
-
-        return view('shops.index', compact(['products', 'category']));
-    }
-
-    public function paginate(Request $request)
-    {
-        $search = $request->search;
-        $category = $request->category;
-        $tag = $request->tag;
-        if ($search) {
-            $products = Product::where('name', 'like', "%$search%")->paginate();
-        } elseif ($category) {
-            $products = Category::find($category)->products()->paginate();
-        } elseif ($tag) {
-            $products = Tag::find($tag)->products()->paginate();
-        } else {
-            $products =  Category::find(1)->products()->paginate(12);
-        }
-
-        return view('shops.partial.product', compact("products"));
-    }
-
-    public function details($id)
-    {
-        $product = Product::find($id);
-
-        return view('shops.details', compact("product"));
+        return redirect()->route('dashboard');
     }
 }

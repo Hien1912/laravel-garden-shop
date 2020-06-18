@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTagsTable extends Migration
+class AddForeignKeysToProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreateTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tags', function (Blueprint $table) {
-            $table->string('id')->primary();
-            $table->string('name')->unique();
-            $table->string('category_id');
+        Schema::table('products', function (Blueprint $table) {
+            $table->foreign('category_id', 'products_fk')->references("id")->on('categories')->onDelete('cascade');
         });
     }
 
@@ -27,6 +25,8 @@ class CreateTagsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tags');
+        Schema::table('products', function (Blueprint $table) {
+            $table->dropForeign('products_fk');
+        });
     }
 }

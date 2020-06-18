@@ -15,7 +15,7 @@
         </div>
         <div class="form-group col-12 col-lg-12 col-sm-8">
             <label>Địa chỉ</label>
-            <input class="form-control" name="address" required value="{{ old('address') }}">
+            <input class="form-control" type="text" name="address" required value="{{ old('address') }}">
         </div>
         <div class="form-group col-12 col-sm-4 col-lg-12">
             <label>Tỉnh/Thành Phố</label>

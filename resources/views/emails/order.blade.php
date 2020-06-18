@@ -51,8 +51,8 @@
                 <th colspan="3">
                     <h3>Tổng</h3>
                 </th>
-                <th style="text-align: right">Số lượng: {{ $data["totalQty"] }}</th>
-                <th colspan="2" style="text-align: right">Thanh toán: @money($data['totalPrice'])</th>
+                <th style="text-align: right">Số lượng: {{ $data["total_quantity"] }}</th>
+                <th colspan="2" style="text-align: right">Thanh toán: @money($data['total_price'])</th>
             </tr>
         </tfoot>
     </table>

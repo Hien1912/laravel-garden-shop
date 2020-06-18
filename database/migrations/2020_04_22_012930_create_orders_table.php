@@ -14,19 +14,16 @@ class CreateOrdersTable extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id();
-            $table->string('status')->default('pending');
-            $table->integer('totalquantity');
-            $table->bigInteger('total');
+            $table->unsignedInteger('id', true);
+            $table->enum('status', ['tiep-nhan', 'xac-nhan', 'gui-hang', 'hoan-tat', 'huy'])->default('tiep-nhan');
+            $table->string('name');
+            $table->string('email');
+            $table->string('phone');
+            $table->string('address');
+            $table->string('city');
+            $table->unsignedInteger('total_quantity');
+            $table->unsignedBigInteger('total_price');
             $table->timestamps();
-        });
-
-        Schema::create('orderdetails', function (Blueprint $table) {
-            $table->foreignId('order_number')->constrained('orders');
-            $table->foreignId('product_id')->constrained('products');
-            $table->integer('quantity');
-            $table->bigInteger('price');
-            $table->primary(['order_number', 'product_id']);
         });
     }
 
@@ -37,7 +34,6 @@ class CreateOrdersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orderdetails');
         Schema::dropIfExists('orders');
     }
 }
