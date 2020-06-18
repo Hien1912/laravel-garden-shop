@@ -71,5 +71,9 @@ $(document).ready(function () {
     });
 
     App.init();
+
+    $('#sidebarCollapse').on('click', function () {
+        $('#sidebar').toggleClass('active');
+    });
 });
 
