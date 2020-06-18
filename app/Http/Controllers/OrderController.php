@@ -9,6 +9,18 @@ class OrderController extends Controller
     public function index($status)
     {
         return view('admin.order')
-            ->with('sidebar', ['donhang' => true, "$status" => true]);;
+            ->with('sidebar', ['donhang', "$status"]);
+    }
+
+    public function getByStatus()
+    {
+    }
+
+    public function getById()
+    {
+    }
+
+    public function update()
+    {
     }
 }
