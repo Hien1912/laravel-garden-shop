@@ -11,8 +11,9 @@ class ProductController extends Controller
 {
     public function index($category_id)
     {
+        $list = ['cay-canh' => "Cây cảnh", 'chau-canh' => "Chậu cảnh", 'phu-kien' => "Phụ kiện", 'thung-rac' => "Rác"];
         return view("admin.product")
-            ->with('sidebar', ['sanpham', "$category_id"]);
+            ->with("sidebar", ["Sản phẩm", $list["$category_id"]]);
     }
 
     public function getByCategoryId($category_id)
