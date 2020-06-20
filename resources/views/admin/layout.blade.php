@@ -31,11 +31,11 @@
 						<img src="./img/avatar-6.jpg" alt="Jason Doe" style="max-width: 2.5rem;" class="img-fluid rounded-circle shadow">
 					</a>
 					<div aria-labelledby="userInfo" class="dropdown-menu">
-						<a href="#" class="dropdown-item">
+						<a href="javascript:void(0)" class="dropdown-item">
 							<strong class="d-block text-uppercase headings-font-family">{{ Auth::user()->name }}</strong>
 							<small>{{ Auth::user()->email }}</small>
 						</a>
-						<a href="{{ route("logout") }}" class="dropdown-item">Logout</a>
+						{{-- <a href="{{ route("logout") }}" class="dropdown-item">Logout</a> --}}
 					</div>
 				</li>
 			</ul>
@@ -99,9 +99,12 @@
 			<div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">EXTRAS</div>
 			<ul class="sidebar-menu list-unstyled">
 				<li class="sidebar-list-item">
-					<a href="{{ route("logout") }}" class="sidebar-link text-muted">
+					<a href="javascript:void(0)" class="sidebar-link text-muted" onclick="$('#logout').submit()">
+						<form action="{{ route("logout") }}" id="logout" method="post">
+							@csrf
 						<i class="o-exit-1 mr-3 text-gray"></i>
-						<span>Logout</span>
+						<span onclick="this.form-submit()">Logout</span>
+						</form>
 					</a>
 				</li>
 			</ul>

@@ -1,110 +1,144 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <base href="{{ asset('') }}">
-    <title>@yield('title', 'Admin Dashboard')</title>
+	<title>Admin Dashboard</title>
+	<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha256-aAr2Zpq8MZ+YA/D6JtRD3xtrwpEz2IqOS+pWD/7XKIw=" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css" integrity="sha256-WolrNTZ9lY0QL5f0/Qi1yw3RGnDLig2HVLYkrshm7Y0=" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.css" integrity="sha256-VxlXnpkS8UAw3dJnlJj8IjIflIWmDUVQbXD9grYXr98=" crossorigin="anonymous" />
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css" integrity="sha256-JHGEmB629pipTkMag9aMaw32I8zle24p3FpsEeI6oZU=" crossorigin="anonymous" />
-    <link rel="stylesheet" href="./css/admin/style3.css">
-    <link rel="stylesheet" href="./css/admin/app.css">
-    @stack('css')
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.css" integrity="sha256-VxlXnpkS8UAw3dJnlJj8IjIflIWmDUVQbXD9grYXr98=" crossorigin="anonymous" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
+	<link rel="stylesheet" href="./css/admin/orionicons.css">
+	<link rel="stylesheet" href="./css/admin/app.css">
+	<link rel="stylesheet" href="./css/admin/custom.css">
+	@stack('css')
 </head>
 <body>
-    <div class="wrapper">
-        <nav id="sidebar" class="bg-dark">
-            <div id="dismiss">
-                <i class="fas fa-arrow-left"></i>
-            </div>
-            <div class="sidebar-header bg-dark">
-                <h3 class="text-center">@auth {{ Auth::user()->name }} @endauth</h3>
-            </div>
-            <ul class="list-unstyled components">
-                <p class="text-center">Garden Shop</p>
-                <li class="@if(in_array("Dashboard", $sidebar)) active @endif">
-                    <a href="/dashboard">Dashboard</a>
-                </li>
-                <li class="@if(in_array("Sản Phẩm", $sidebar)) active @endif">
-                    <a href="#ProductSubmenu" data-toggle="collapse" aria-expanded="false">Sản Phẩm</a>
-                    <ul class="collapse list-unstyled @if(in_array("Sản Phẩm", $sidebar)) show @endif" id="ProductSubmenu">
-                        <li class="@if(in_array("Cây cảnh", $sidebar)) active @endif">
-                            <a href="/san-pham/cay-canh">Cây cảnh</a>
-                        </li>
-                        <li class="@if(in_array("Chậu cảnh", $sidebar)) active @endif">
-                            <a href="/san-pham/chau-canh">Chậu cảnh</a>
-                        </li>
-                        <li class="@if(in_array("Phụ kiện", $sidebar)) active @endif">
-                            <a href="/san-pham/phu-kien">Phụ kiện</a>
-                        </li>
-                        <li class="@if(in_array("Rác", $sidebar)) active @endif">
-                            <a href="/san-pham/thung-rac">Rác</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="@if(in_array("Đơn hàng", $sidebar)) active @endif">
-                    <a href="#OrderSubmenu" data-toggle="collapse" aria-expanded="false">Đơn hàng</a>
-                    <ul class="collapse list-unstyled @if(in_array("Đơn hàng", $sidebar)) show @endif" id="OrderSubmenu">
-                        <li class="@if(in_array("Tiếp nhận", $sidebar)) active @endif">
-                            <a href="/don-hang/tiep-nhan">Tiếp nhận</a>
-                        </li>
-                        <li class="@if(in_array("Xác nhận", $sidebar)) active @endif">
-                            <a href="/don-hang/xac-nhan">Xác nhận</a>
-                        </li>
-                        <li class="@if(in_array("Đang gửi", $sidebar)) active @endif">
-                            <a href="/don-hang/dang-gui">Đang gửi</a>
-                        </li>
-                        <li class="@if(in_array("Hoàn tất", $sidebar)) active @endif">
-                            <a href="/don-hang/hoan-tat">Hoàn tất</a>
-                        </li>
-                        <li class="@if(in_array("Đơn Hủy", $sidebar)) active @endif">
-                            <a href="/don-hang/huy">Đơn Hủy</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
+	<header class="header">
+		<nav class="navbar navbar-expand-lg px-4 py-2 bg-white shadow">
+			<a href="javascript:void(0);" class="sidebar-toggler text-gray-500 mr-4 mr-lg-5 lead">
+				<i class="fas fa-align-left"></i>
+			</a>
+			<a href="/dashboard" class="navbar-brand font-weight-bold text-uppercase text-base">Admin Dashboard</a>
+			<ul class="ml-auto d-flex align-items-center list-unstyled mb-0">
+				<li class="nav-item dropdown ml-auto">
+					<a id="userInfo" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">
+						<img src="./img/avatar-6.jpg" alt="Jason Doe" style="max-width: 2.5rem;" class="img-fluid rounded-circle shadow">
+					</a>
+					<div aria-labelledby="userInfo" class="dropdown-menu">
+						<a href="javascript:void(0)" class="dropdown-item">
+							<strong class="d-block text-uppercase headings-font-family">{{ Auth::user()->name }}</strong>
+							<small>{{ Auth::user()->email }}</small>
+						</a>
+						{{-- <a href="{{ route("logout") }}" class="dropdown-item">Logout</a> --}}
+					</div>
+				</li>
+			</ul>
+		</nav>
+	</header>
+	<div class="d-flex align-items-stretch">
+		<div id="sidebar" class="sidebar py-3">
+			<div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">MAIN</div>
+			<ul class="sidebar-menu list-unstyled">
+				<li class="sidebar-list-item">
+					<a href="{{ route("dashboard") }}" class="sidebar-link text-muted @isset($dashboard) active @endisset">
+						<i class="o-home-1 mr-3 text-gray"></i>
+						<span>Dashboard</span>
+					</a>
+				</li>
+				<li class="sidebar-list-item">
+					<a href="#product-collapse" data-toggle="collapse" aria-expanded="{{ $product ?? "false" }}" class="sidebar-link text-muted{{ isset($product) ? "" : " collapsed" }}" aria-controls="product-collapse">
+						<i class="o-database-1 mr-3 text-gray"></i>
+						<span>Products</span>
+					</a>
+					<div id="product-collapse" class="collapse{{ isset($product) ? " show": "" }}">
+						<ul class="sidebar-menu list-unstyled border-left border-primary border-thick">
+							<li class="sidebar-list-item active">
+								<a href="{{ route("product.bonsai") }}" class="sidebar-link text-muted pl-lg-5{{ isset($bonsai) ? " active": "" }}">Bonsai</a>
+							</li>
+							<li class="sidebar-list-item">
+								<a href="{{ route("product.pots") }}" class="sidebar-link text-muted pl-lg-5{{ isset($pots) ? " active": "" }}">Pots</a>
+							</li>
+							<li class="sidebar-list-item">
+								<a href="{{ route("product.accessories") }}" class="sidebar-link text-muted pl-lg-5{{ isset($accessories) ? " active": "" }}">Accessories</a>
+							</li>
+						</ul>
+					</div>
+				</li>
+				<li class="sidebar-list-item">
+					<a href="#order-collapse" data-toggle="collapse" aria-expanded="{{ $order ?? "false" }}" class="sidebar-link text-muted{{ isset($order) ? "" : " collapsed" }}" aria-controls="order-collapse">
+						<i class="o-paperwork-1 mr-3 text-gray"></i>
+						<span>Orders</span>
+					</a>
+					<div id="order-collapse" class="collapse">
+						<ul class="sidebar-menu list-unstyled border-left border-primary border-thick">
+							<li class="sidebar-list-item">
+								<a href="{{ route("order.pending") }}" class="sidebar-link text-muted pl-lg-5{{ isset($pending) ? " active": "" }}">Pending</a>
+							</li>
+							<li class="sidebar-list-item">
+								<a href="{{ route("order.verified") }}" class="sidebar-link text-muted pl-lg-5{{ isset($verified) ? " active": "" }}">Verified</a>
+							</li>
+							<li class="sidebar-list-item">
+								<a href="{{ route("order.delivery") }}" class="sidebar-link text-muted pl-lg-5{{ isset($delivery) ? " active": "" }}">Delivery</a>
+							</li>
+							<li class="sidebar-list-item">
+								<a href="{{ route("order.finished") }}" class="sidebar-link text-muted pl-lg-5{{ isset($finished) ? " active": "" }}">Finished</a>
+							</li>
+							<li class="sidebar-list-item">
+								<a href="{{ route("order.cancelled") }}" class="sidebar-link text-muted pl-lg-5{{ isset($cancelled) ? " active": "" }}">Cancelled</a>
+							</li>
+						</ul>
+					</div>
+				</li>
+			</ul>
+			<div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">EXTRAS</div>
+			<ul class="sidebar-menu list-unstyled">
+				<li class="sidebar-list-item">
+					<a href="javascript:void(0)" class="sidebar-link text-muted" onclick="$('#logout').submit()">
+						<form action="{{ route("logout") }}" id="logout" method="post">
+							@csrf
+						<i class="o-exit-1 mr-3 text-gray"></i>
+						<span onclick="this.form-submit()">Logout</span>
+						</form>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="page-holder w-100 d-flex flex-wrap">
 
-            <ul class="list-unstyled CTAs">
-                <li class="">
-                    <a href="/logout" class="article">Log out</a>
-                </li>
-            </ul>
-        </nav>
-        <div id="content" class="container-fluid container-lg">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
-                    <button type="button" id="sidebarCollapse" class="btn btn-info">
-                        <i class="fas fa-align-left"></i>
-                        <span class="d-none d-sm-inline-block">Toggle Sidebar</span>
-                    </button>
-                    <ol class="breadcrumb mb-0">
-                        <li class="breadcrumb-item @if(count($sidebar) < 2) active @endif">{{ $sidebar[0] }}</li>
-                        @if(count($sidebar) > 1 )
-                        <li class="breadcrumb-item active">{{ $sidebar[1] }}</li>
-                        @endif
-                    </ol>
-                </div>
-            </nav>
-            <div class="container-fluid container-xl">
-                @yield('content')
+            {{-- main content --}}
+
+			<div class="container-fluid px-xl-5">
+				@yield('content')
             </div>
-        </div>
-    </div>
+            
+            {{-- end main content --}}
+
+			<footer class="footer bg-white shadow align-self-end py-3 px-xl-5 w-100">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-6 text-center text-md-left text-primary">
+							<p class="mb-2 mb-md-0">&copy; {{ date("Y") }} by GardenShop</p>
+						</div>
+						<div class="col-md-6 text-center text-md-right text-gray-400">
+							<p class="mb-0">Design by <a href="/" class="external text-gray-400">GardenShop</a></p>
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js" integrity="sha256-56zsTlMwzGRtLC4t51alLh5cKYvi0hnbhEXQTVU/zZQ=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js" integrity="sha256-Xt8pc4G0CdcRvI0nZ2lRpZ4VHng0EoUDMlGcBSQ9HiQ=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.js" integrity="sha256-Ka8obxsHNCz6H9hRpl8X4QV3XmhxWyqBpk/EpHYyj9k=" crossorigin="anonymous"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js" integrity="sha256-AKEjDiK2rz+d8TSPLNVNydvgJvOkG5veMAnc79FkiuE=" crossorigin="anonymous"></script>
 <script src="./js/admin/app.js"></script>
 @stack('js')
 </html>

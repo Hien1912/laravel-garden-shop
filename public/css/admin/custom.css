@@ -1,1 +1,17 @@
 /* your styles go here */
+.btn-action {
+  padding: 6px;
+  width: 34px !important;
+  height: 34px !important;
+  margin: 0 3px;
+  text-align: center;
+}
+
+[id$="table"] td {
+  vertical-align: middle;
+}
+
+div[id$="table"] {
+  overflow-x: scroll;
+  padding-bottom: 50px;
+}
