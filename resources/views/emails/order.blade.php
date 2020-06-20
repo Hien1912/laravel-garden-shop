@@ -29,8 +29,8 @@
         @foreach ($carts as $cart)
             <tr>
                 <td>
-                    {{-- <img src="{{ $message->embed(asset("images/products/" . $cart->name->avatar . "")) }}" width="75px" height="75px"> --}}
-                    <img src="{{ asset("images/products/" . $cart->name->avatar . "") }}" width="75px" height="75px">
+                    <img src="{{ $message->embed(asset("images/products/" . $cart->name->avatar . "")) }}" width="75px" height="75px">
+                    {{-- <img src="{{ asset("images/products/" . $cart->name->avatar . "") }}" width="75px" height="75px"> --}}
                 </td>
                 <td>
                     {{ $cart->name->name }}

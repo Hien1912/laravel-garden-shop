@@ -22,25 +22,25 @@ class DataSeeder extends Seeder
         ]);
 
         Category::insert([
-            ['id' => 'cay-canh', "name" => "Cây cảnh"],
-            ['id' => 'chau-canh', "name" => "Chậu cảnh"],
-            ['id' => 'phu-kien', "name" => "Phụ kiện"]
+            ['id' => 'bonsai', "name" => "Cây cảnh"],
+            ['id' => 'pots', "name" => "Chậu cảnh"],
+            ['id' => 'accessories', "name" => "Phụ kiện"]
         ]);
 
         Tag::insert([
-            ['id' => "cay-canh-de-ban", 'name' => 'Cây cảnh để bàn', 'category_id' => "cay-canh"],
-            ['id' => 'cay-thuy-sinh', 'name' => 'Cây thủy sinh', 'category_id' => "cay-canh"],
-            ['id' => 'sen-da-xuong-rong', 'name' => 'Sen đá, xương rồng', 'category_id' => "cay-canh"],
-            ['id' => 'cay-chau-treo', 'name' => 'Cây chậu treo', 'category_id' => "cay-canh"],
-            ['id' => 'chau-dat-nung', 'name' => 'Chậu đất nung', 'category_id' => 'chau-canh'],
-            ['id' => 'chau-xi-mang', 'name' => 'Chậu xi măng', 'category_id' => 'chau-canh'],
-            ['id' => 'chau-composite', 'name' => 'Chậu composite', 'category_id' => 'chau-canh'],
-            ['id' => 'chau-men-su', 'name' => 'Chậu men sứ', 'category_id' => 'chau-canh'],
-            ['id' => 'chau-nhua-ABS', 'name' => 'Chậu nhựa ABS', 'category_id' => 'chau-canh'],
-            ['id' => 'dat-trong-phan-bon', 'name' => 'Đất trồng, phân bón', 'category_id' => "phu-kien"],
-            ['id' => 'dung-cu-lam-vuon', 'name' => 'Dụng cụ làm vườn', 'category_id' => "phu-kien"],
-            ['id' => 'dung-dich-thuy-sinh', 'name' => 'Dung dịch thủy sinh', 'category_id' => "phu-kien"],
-            ['id' => 'vat-trang-tri', 'name' => 'Vật trang trí', 'category_id' => "phu-kien"]
+            ['id' => "cay-canh-de-ban", 'name' => 'Cây cảnh để bàn', 'category_id' => "bonsai"],
+            ['id' => 'cay-thuy-sinh', 'name' => 'Cây thủy sinh', 'category_id' => "bonsai"],
+            ['id' => 'sen-da-xuong-rong', 'name' => 'Sen đá, xương rồng', 'category_id' => "bonsai"],
+            ['id' => 'cay-chau-treo', 'name' => 'Cây chậu treo', 'category_id' => "bonsai"],
+            ['id' => 'chau-dat-nung', 'name' => 'Chậu đất nung', 'category_id' => 'pots'],
+            ['id' => 'chau-xi-mang', 'name' => 'Chậu xi măng', 'category_id' => 'pots'],
+            ['id' => 'chau-composite', 'name' => 'Chậu composite', 'category_id' => 'pots'],
+            ['id' => 'chau-men-su', 'name' => 'Chậu men sứ', 'category_id' => 'pots'],
+            ['id' => 'chau-nhua-ABS', 'name' => 'Chậu nhựa ABS', 'category_id' => 'pots'],
+            ['id' => 'dat-trong-phan-bon', 'name' => 'Đất trồng, phân bón', 'category_id' => "accessories"],
+            ['id' => 'dung-cu-lam-vuon', 'name' => 'Dụng cụ làm vườn', 'category_id' => "accessories"],
+            ['id' => 'dung-dich-thuy-sinh', 'name' => 'Dung dịch thủy sinh', 'category_id' => "accessories"],
+            ['id' => 'vat-trang-tri', 'name' => 'Vật trang trí', 'category_id' => "accessories"]
         ]);
 
         $tag = Tag::all(['id']);

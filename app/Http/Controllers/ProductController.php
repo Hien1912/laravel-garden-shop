@@ -4,15 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
 use App\Product;
+use App\Tag;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 class ProductController extends Controller
 {
-    public function index($category_id)
+    public function index()
     {
-        return view("admin.product")
-            ->with('sidebar', ['sanpham', "$category_id"]);
+        $category = explode(".", Route::currentRouteName())[1];
+        return view("admin.product")->with(['product' => "true", $category => "true"]);
     }
 
     public function getByCategoryId($category_id)
@@ -29,30 +31,37 @@ class ProductController extends Controller
     {
         $product = Product::withTrashed()->find($id);
 
-        if ($product)
+        if ($product) {
+            $product->tags;
+            $product->category;
             return response()->json($product, 200);
+        }
 
         return response()->json($product, 404);
     }
 
     public function create(ProductRequest $request)
     {
-        $data = $request->except('avatar');
+        $data = $request->except(['avatar', "tag_id"]);
+        $tags = $request->tag_id;
 
         $product = Product::create($data);
 
-        if ($product && $request->hasFile('avatar')) {
-            $file = $request->avatar;
-            $ext =  $file->getClientOriginalExtension();
-            $avatar =  "product_$product->id" . $ext;
+        if ($product) {
+            $product->tags()->sync($tags);
+            if ($request->hasFile('avatar')) {
+                $file = $request->avatar;
+                $ext =  $file->getClientOriginalExtension();
+                $avatar =  "product_$product->id" . $ext;
 
-            if (file_exists("images/products/" . $avatar)) {
-                unlink("images/products/$avatar");
+                if (file_exists("images/products/" . $avatar)) {
+                    unlink("images/products/$avatar");
+                }
+
+                $file->move("images/products/", $avatar);
+
+                $product = $product->update(['avatar' => $avatar]);
             }
-
-            $file->move("images/products/", $avatar);
-
-            $product = $product->update(['avatar' => $avatar]);
 
             return response()->json($product, 201);
         }
@@ -62,11 +71,17 @@ class ProductController extends Controller
 
     public function update(ProductRequest $request, $id)
     {
-        $data = $request->except('avatar');
+        $data = $request->except(['avatar', "tag_id"]);
 
-        $product = Product::withTrashed()->find($id);
+        $product = Product::find($id);
 
         if ($product) {
+            $product->tags()->detach();
+            $tags = $request->tag_id;
+            foreach ($tags as $id) {
+                $product->attach(Tag::find($id));
+            }
+
             if ($request->hasFile('avatar')) {
                 $file = $request->avatar;
                 $ext =  $file->getClientOriginalExtension();
@@ -104,7 +119,7 @@ class ProductController extends Controller
 
     public function getTrash()
     {
-        $products = Product::onlyTrashed()->orderBy('deleted_at')->get()->each(function ($product) {
+        $products = Product::onlyTrashed()->orderBy('deleted_at', "DESC")->get()->each(function ($product) {
             $product->category;
             $product->tags;
         });

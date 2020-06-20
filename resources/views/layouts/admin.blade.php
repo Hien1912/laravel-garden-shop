@@ -2,87 +2,138 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <base href="{{ asset('') }}">
-    <title>@yield('title', 'Quản lý')</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+	<title>Admin Dashboard</title>
+	<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha256-aAr2Zpq8MZ+YA/D6JtRD3xtrwpEz2IqOS+pWD/7XKIw=" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css" integrity="sha256-WolrNTZ9lY0QL5f0/Qi1yw3RGnDLig2HVLYkrshm7Y0=" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.css" integrity="sha256-VxlXnpkS8UAw3dJnlJj8IjIflIWmDUVQbXD9grYXr98=" crossorigin="anonymous" />
-    <link rel="stylesheet" href="./css/admin/app.css">
-    @stack('css')
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.css" integrity="sha256-VxlXnpkS8UAw3dJnlJj8IjIflIWmDUVQbXD9grYXr98=" crossorigin="anonymous" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
+	<link rel="stylesheet" href="./css/admin/orionicons.css">
+	<link rel="stylesheet" href="./css/admin/app.css">
+	<link rel="stylesheet" href="./css/admin/custom.css">
+	@stack('css')
 </head>
-<body class="bg-light">
-    <header>
-        <nav class="navbar navbar-expand-xs navbar-light bg-dark fixed-top" style="height: 55px">
-            <button class="navbar-toggler d-none d-lg-block">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <button class="navbar-toggler d-block d-lg-none">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <ol class="breadcrumb m-0 p-0 bg-dark text-success mx-auto">
-            </ol>
-            <a href="javascript:App.logout()" class="btn ml-auto btn-outline-light mr-md-5" title="Đăng xuất">
-                <i class="fa fa-power-off"></i>
-            </a>
-        </nav>
-        <div class="position-fixed d-none mh-100 d-lg-block border bg-dark" id="side-left" style="left: -1px;width: 240px;min-height: 100vh">
-            <ul class="list-group list-group-flush bg-dark mt-5 pt-1">
-                <a class="list-group-item list-group-item-action @if(in_array("dashboard", $sidebar)) active @endif" href="/dashboard">
-                    <i class="fa fa-dashboard">&nbsp;&nbsp;&nbsp;&nbsp;</i>
-                    <span>Dashboard</span>
-                </a>
-                <button class="list-group-item list-group-item-action" href="#san-pham-collapse" data-toggle="collapse">
-                    <i class="fa fa-server">&nbsp;&nbsp;&nbsp;&nbsp;</i>
-                    <span>Sản phẩm</span>
-                </button>
-                <div id="san-pham-collapse" class="collapse @if(in_array("sanpham", $sidebar)) show @endif">
-                    <a class="list-group-item list-group-item-action @if(in_array("cay-canh", $sidebar)) active @endif pl-5 " href="/san-pham/cay-canh">
-                        <span>Cây cảnh</span>
-                    </a>
-                    <a class="list-group-item list-group-item-action @if(in_array("chau-canh", $sidebar)) active @endif pl-5 " href="/san-pham/chau-canh">
-                        <span>Chậu cảnh</span>
-                    </a>
-                    <a class="list-group-item list-group-item-action @if(in_array("phu-kien", $sidebar)) active @endif pl-5 " href="/san-pham/phu-kien">
-                        <span>Phụ kiện</span>
-                    </a>
-                    <a class="list-group-item list-group-item-action @if(in_array("thung-rac", $sidebar)) active @endif pl-5 " href="/san-pham/thung-rac">
-                        <span>Thùng rác</span>
-                    </a>
-                </div>
-                <button class="list-group-item list-group-item-action @if(in_array("donhang", $sidebar)) show @endif" href="#don-hang-collapse" data-toggle="collapse">
-                    <i class="fa fa-first-order">&nbsp;&nbsp;&nbsp;&nbsp;</i>
-                    <span>Đơn hàng</span>
-                </button>
-                <div id="don-hang-collapse" class="collapse ">
-                    <a class="list-group-item list-group-item-action @if(in_array("tiep-nhan", $sidebar)) active @endif pl-5 " href="/don-hang/tiep-nhan">
-                        <span>Tiếp nhận</span>
-                    </a>
-                    <a class="list-group-item list-group-item-action @if(in_array("xac-nhan", $sidebar)) active @endif pl-5 " href="/don-hang/xac-nhan">
-                        <span>Xác nhận</span>
-                    </a>
-                    <a class="list-group-item list-group-item-action @if(in_array("dang-gui", $sidebar)) active @endif pl-5 " href="/don-hang/dang-gui">
-                        <span>Gửi hàng</span>
-                    </a>
-                    <a class="list-group-item list-group-item-action @if(in_array("hoan-tat", $sidebar)) active @endif pl-5 " href="/don-hang/hoan-tat">
-                        <span>Hoàn tất</span>
-                    </a>
-                    <a class="list-group-item list-group-item-action @if(in_array("huy", $sidebar)) active @endif pl-5 " href="/don-hang/huy">
-                        <span>Hủy</span>
-                    </a>
-                </div>
-            </ul>
-        </div>
-    </header>
-    <main id="content">
-        @yield('content')
-    </main>
-    <footer></footer>
+<body>
+	<header class="header">
+		<nav class="navbar navbar-expand-lg px-4 py-2 bg-white shadow">
+			<a href="javascript:void(0);" class="sidebar-toggler text-gray-500 mr-4 mr-lg-5 lead">
+				<i class="fas fa-align-left"></i>
+			</a>
+			<a href="/dashboard" class="navbar-brand font-weight-bold text-uppercase text-base">Admin Dashboard</a>
+			<ul class="ml-auto d-flex align-items-center list-unstyled mb-0">
+				<li class="nav-item dropdown ml-auto">
+					<a id="userInfo" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">
+						<img src="./img/avatar-6.jpg" alt="Jason Doe" style="max-width: 2.5rem;" class="img-fluid rounded-circle shadow">
+					</a>
+					<div aria-labelledby="userInfo" class="dropdown-menu">
+						<a href="javascript:void(0)" class="dropdown-item">
+							<strong class="d-block text-uppercase headings-font-family">{{ Auth::user()->name }}</strong>
+							<small>{{ Auth::user()->email }}</small>
+						</a>
+						{{-- <a href="{{ route("logout") }}" class="dropdown-item">Logout</a> --}}
+					</div>
+				</li>
+			</ul>
+		</nav>
+	</header>
+	<div class="d-flex align-items-stretch">
+		<div id="sidebar" class="sidebar py-3">
+			<div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">MAIN</div>
+			<ul class="sidebar-menu list-unstyled">
+				<li class="sidebar-list-item">
+					<a href="{{ route("dashboard") }}" class="sidebar-link text-muted @isset($dashboard) active @endisset">
+						<i class="o-home-1 mr-3 text-gray"></i>
+						<span>Dashboard</span>
+					</a>
+				</li>
+				<li class="sidebar-list-item">
+					<a href="#product-collapse" data-toggle="collapse" aria-expanded="{{ $product ?? "false" }}" class="sidebar-link text-muted{{ isset($product) ? "" : " collapsed" }}" aria-controls="product-collapse">
+						<i class="o-database-1 mr-3 text-gray"></i>
+						<span>Products</span>
+					</a>
+					<div id="product-collapse" class="collapse{{ isset($product) ? " show": "" }}">
+						<ul class="sidebar-menu list-unstyled border-left border-primary border-thick">
+							<li class="sidebar-list-item active">
+								<a href="{{ route("product.bonsai") }}" class="sidebar-link text-muted pl-lg-5{{ isset($bonsai) ? " active": "" }}">Bonsai</a>
+							</li>
+							<li class="sidebar-list-item">
+								<a href="{{ route("product.pots") }}" class="sidebar-link text-muted pl-lg-5{{ isset($pots) ? " active": "" }}">Pots</a>
+							</li>
+							<li class="sidebar-list-item">
+								<a href="{{ route("product.accessories") }}" class="sidebar-link text-muted pl-lg-5{{ isset($accessories) ? " active": "" }}">Accessories</a>
+							</li>
+						</ul>
+					</div>
+				</li>
+				<li class="sidebar-list-item">
+					<a href="#order-collapse" data-toggle="collapse" aria-expanded="{{ $order ?? "false" }}" class="sidebar-link text-muted{{ isset($order) ? "" : " collapsed" }}" aria-controls="order-collapse">
+						<i class="o-paperwork-1 mr-3 text-gray"></i>
+						<span>Orders</span>
+					</a>
+					<div id="order-collapse" class="collapse">
+						<ul class="sidebar-menu list-unstyled border-left border-primary border-thick">
+							<li class="sidebar-list-item">
+								<a href="{{ route("order.pending") }}" class="sidebar-link text-muted pl-lg-5{{ isset($pending) ? " active": "" }}">Pending</a>
+							</li>
+							<li class="sidebar-list-item">
+								<a href="{{ route("order.verified") }}" class="sidebar-link text-muted pl-lg-5{{ isset($verified) ? " active": "" }}">Verified</a>
+							</li>
+							<li class="sidebar-list-item">
+								<a href="{{ route("order.delivery") }}" class="sidebar-link text-muted pl-lg-5{{ isset($delivery) ? " active": "" }}">Delivery</a>
+							</li>
+							<li class="sidebar-list-item">
+								<a href="{{ route("order.finished") }}" class="sidebar-link text-muted pl-lg-5{{ isset($finished) ? " active": "" }}">Finished</a>
+							</li>
+							<li class="sidebar-list-item">
+								<a href="{{ route("order.cancelled") }}" class="sidebar-link text-muted pl-lg-5{{ isset($cancelled) ? " active": "" }}">Cancelled</a>
+							</li>
+						</ul>
+					</div>
+				</li>
+			</ul>
+			<div class="text-gray-400 text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">EXTRAS</div>
+			<ul class="sidebar-menu list-unstyled">
+				<li class="sidebar-list-item">
+					<a href="javascript:void(0)" class="sidebar-link text-muted" onclick="$('#logout').submit()">
+						<form action="{{ route("logout") }}" id="logout" method="post">
+							@csrf
+						<i class="o-exit-1 mr-3 text-gray"></i>
+						<span onclick="this.form-submit()">Logout</span>
+						</form>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="page-holder w-100 d-flex flex-wrap">
+
+            {{-- main content --}}
+
+			<div class="container-fluid px-xl-5">
+				@yield('content')
+            </div>
+            
+            {{-- end main content --}}
+
+			<footer class="footer bg-white shadow align-self-end py-3 px-xl-5 w-100">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-6 text-center text-md-left text-primary">
+							<p class="mb-2 mb-md-0">&copy; {{ date("Y") }} by GardenShop</p>
+						</div>
+						<div class="col-md-6 text-center text-md-right text-gray-400">
+							<p class="mb-0">Design by <a href="/" class="external text-gray-400">GardenShop</a></p>
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js" integrity="sha256-56zsTlMwzGRtLC4t51alLh5cKYvi0hnbhEXQTVU/zZQ=" crossorigin="anonymous"></script>
