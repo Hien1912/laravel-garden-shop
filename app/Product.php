@@ -39,6 +39,6 @@ class Product extends Model
      */
     public function scopeCategoryId($query, $category)
     {
-        return $query->where('category_id', $category)->orderBy("created_at", "DESC");
+        return $query->where('category_id', $category)->orderBy("created_at");
     }
 }

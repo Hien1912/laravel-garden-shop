@@ -8,6 +8,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('admin.dashboard')->with("dashboard", "true");
+        return view('admin.dashboard')
+            ->with('sidebar', ['dashboard']);
     }
 }
