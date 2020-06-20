@@ -21,7 +21,7 @@ class ShopController extends Controller
         } elseif ($tag) {
             $products = Tag::find($tag)->products()->paginate();
         } else {
-            $products =  Category::find('Cay-canh')->products()->paginate(12);
+            $products =  Category::find('bonsai')->products()->paginate(12);
         }
 
         $category = Category::all();
@@ -41,7 +41,7 @@ class ShopController extends Controller
         } elseif ($tag) {
             $products = Tag::find($tag)->products()->paginate();
         } else {
-            $products =  Category::find('Cay-canh')->products()->paginate(12);
+            $products =  Category::find('bonsai')->products()->paginate(12);
         }
 
         return view('shops.partial.product', compact("products"));
