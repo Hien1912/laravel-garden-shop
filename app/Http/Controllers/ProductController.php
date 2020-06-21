@@ -52,7 +52,7 @@ class ProductController extends Controller
             if ($request->hasFile('avatar')) {
                 $file = $request->avatar;
                 $ext =  $file->getClientOriginalExtension();
-                $avatar =  "product_$product->id" . $ext;
+                $avatar =  "product_$product->id.$ext";
 
                 if (file_exists("images/products/" . $avatar)) {
                     unlink("images/products/$avatar");
@@ -81,7 +81,7 @@ class ProductController extends Controller
             if ($request->hasFile('avatar')) {
                 $file = $request->avatar;
                 $ext =  $file->getClientOriginalExtension();
-                $avatar =  "product_$product->id" . $ext;
+                $avatar =  "product_$product->id.$ext";
 
                 if (file_exists("images/products/" . $avatar)) {
                     unlink("images/products/$avatar");

@@ -29,7 +29,7 @@
 			<ul class="ml-auto d-flex align-items-center list-unstyled mb-0">
 				<li class="nav-item dropdown ml-auto">
 					<a id="userInfo" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">
-						<img src="./img/avatar-6.jpg" alt="Jason Doe" style="max-width: 2.5rem;" class="img-fluid rounded-circle shadow">
+						<img src="./logo.png" alt="Jason Doe" style="max-width: 2.5rem;" class="img-fluid rounded-circle shadow">
 					</a>
 					<div aria-labelledby="userInfo" class="dropdown-menu">
 						<a href="javascript:void(0)" class="dropdown-item">
