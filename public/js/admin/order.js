@@ -48,6 +48,24 @@ Order.drawTable = () => {
 }
 
 Order.details = id => {
+    $("#order-details").empty().html(`
+                        <thead class="thead-light">
+                            <tr>
+                                <th>#</th>
+                                <th>Avatar</th>
+                                <th>Name</th>
+                                <th>Price each</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th colspan="4">Total</th>
+                                <th id="total-quantity"></th>
+                                <th id="total-price"></th>
+                            </tr>
+                        </tfoot>`);
     $("#order-details").DataTable({
         processing: true,
         paging: false,
