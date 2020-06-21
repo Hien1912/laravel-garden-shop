@@ -1,6 +1,7 @@
 let Order = {} || Order;
 
 Order.table;
+Order.tableDetails;
 
 Order.drawTable = () => {
     let uri = location.pathname;
@@ -47,33 +48,25 @@ Order.drawTable = () => {
     });
 }
 
+Order.html;
+Order.modal = () => {
+    Order.html = $('#modal-details .modal-body').html();
+};
+
 Order.details = id => {
-    $("#order-details").empty().html(`
-                        <thead class="thead-light">
-                            <tr>
-                                <th>#</th>
-                                <th>Avatar</th>
-                                <th>Name</th>
-                                <th>Price each</th>
-                                <th>Quantity</th>
-                                <th>Total</th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                            <tr>
-                                <th colspan="4">Total</th>
-                                <th id="total-quantity"></th>
-                                <th id="total-price"></th>
-                            </tr>
-                        </tfoot>`);
-    $("#order-details").DataTable({
+    $('#modal-details .modal-body').html(Order.html);
+
+    if (Order.tableDetails) {
+        Order.tableDetails.clear();
+    }
+
+    Order.tableDetails = $("#order-details").DataTable({
         processing: true,
         paging: false,
         orderable: false,
         ajax: {
             url: `/admin/order/get-${id}`,
             dataSrc: function (res) {
-                console.log(res);
                 let no = 0;
                 $("#total-quantity").html(res.total_quantity);
                 $("#total-price").html(new Intl.NumberFormat("vi-VN", { style: 'currency', currency: 'VND' }).format(res.total_price));
@@ -120,6 +113,7 @@ Order.update = (id) => {
 
 Order.init = () => {
     Order.drawTable();
+    Order.modal();
 }
 
 $(document).ready(() => {

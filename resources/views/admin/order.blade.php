@@ -4,7 +4,7 @@
         <table class="table table-striped table-bordered shadow-lg" width="100%" id="order-table">
             <thead class="thead-light">
                 <tr>
-                    <th>OrderNumber</th>
+                    <th title="Order Number">ON</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Phone</th>
