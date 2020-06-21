@@ -64,6 +64,8 @@ Order.details = id => {
         processing: true,
         paging: false,
         orderable: false,
+        searching: false,
+        infor: false,
         ajax: {
             url: `/admin/order/get-${id}`,
             dataSrc: function (res) {
